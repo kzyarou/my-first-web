@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .profile-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .info {
+            margin-bottom: 15px;
+        }
+        .info label {
+            font-weight: bold;
+        }
+        .logout-button, .main-page-button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .logout-button:hover, .main-page-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-container">
+    <h2>Your Profile</h2>
+    <div class="info">
+        <label>Name:</label>
+        <span id="displayName"></span>
+    </div>
+    <div class="info">
+        <label>Email:</label>
+        <span id="displayEmail"></span>
+    </div>
+    <div class="info">
+        <label>Password:</label>
+        <span id="displayPassword"></span>
+    </div>
+    <button class="main-page-button" id="mainPageButton">Go to Main Page</button>
+    <button class="logout-button" id="logoutButton">Logout</button>
+</div>
+
+<script>
+    // Retrieve user info from localStorage
+    const name = localStorage.getItem('userName');
+    const email = localStorage.getItem('userEmail');
+    const password = localStorage.getItem('userPassword');
+
+    // Display user info
+    document.getElementById('displayName').textContent = name ? name : 'Not set';
+    document.getElementById('displayEmail').textContent = email ? email : 'Not set';
+    document.getElementById('displayPassword').textContent = password ? password : 'Not set';
+
+    // Go to main page functionality
+    document.getElementById('mainPageButton').addEventListener('click', function() {
+        // Set a flag in localStorage to indicate that the user is leaving the profile page
+        localStorage.setItem('fromProfilePage', 'true');
+        window.location.href = 'index.html'; // Redirect to the main page
+    });
+
+    // Logout functionality
+    document.getElementById('logoutButton').addEventListener('click', function() {
+        // Clear localStorage
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPassword');
+
+        // Redirect back to sign up page
+        window.location.href = 'signup.html';
+    });
+</script>
+
+</body>
+</html>
